@@ -1,4 +1,4 @@
-
+package licensing;
 import java.util.Date;
 
 public class DriversLicense extends AbstractPrimaryDocument {
