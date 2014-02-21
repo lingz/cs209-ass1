@@ -1,5 +1,4 @@
-package assignment1;
-
+package licensing;
 import java.util.Date;
 
 public class EmiratesId extends AbstractPrimaryDocument {

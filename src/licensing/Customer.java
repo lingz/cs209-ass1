@@ -1,4 +1,4 @@
-package assignment1;
+package licensing;
 
 // All members public for simplicity - no setters/getters, null by default
 public class Customer {

@@ -1,5 +1,4 @@
-package assignment1;
-
+package licensing;
 // For simplicity, this just has a single member representing the Customer
 public class UAEDriversLicense {
     public Customer driver;
