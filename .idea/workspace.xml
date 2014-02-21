@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="980eea3b-d973-437f-b251-44bc90c50e87" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/AbstractAgent.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/Customer.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/DriversLicense.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/DriversLicenseTranslation.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/EmiratesId.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/EyeTest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/Passport.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/AbstractAgent.java" afterPath="$PROJECT_DIR$/src/licensing/AbstractAgent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.java" afterPath="$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Customer.java" afterPath="$PROJECT_DIR$/src/licensing/Customer.java" />
@@ -20,14 +11,23 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/EyeTest.java" afterPath="$PROJECT_DIR$/src/licensing/EyeTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Passport.java" afterPath="$PROJECT_DIR$/src/licensing/Passport.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" afterPath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Translator.java" afterPath="$PROJECT_DIR$/src/licensing/Translator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/UAEDriversLicense.java" afterPath="$PROJECT_DIR$/src/licensing/UAEDriversLicense.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cs209-ass1.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392983179413" ignored="false" />
-    <file path="/SynchronizedQueue.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985607075" ignored="false" />
+    <file path="/SynchronizedQueue.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392987234862" ignored="false" />
     <file path="/fragment.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392984570425" ignored="false" />
+    <file path="/AbstractAgent.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392986688995" ignored="false" />
+    <file path="/Customer.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985850947" ignored="false" />
+    <file path="/DriversLicense.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985863467" ignored="false" />
+    <file path="/AbstractPrimaryDocument.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985871739" ignored="false" />
+    <file path="/DriversLicenseTranslation.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985882811" ignored="false" />
+    <file path="/EmiratesId.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985890514" ignored="false" />
+    <file path="/EyeTest.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985899835" ignored="false" />
+    <file path="/Passport.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985906294" ignored="false" />
+    <file path="/UAEDriversLicense.java" changelist="980eea3b-d973-437f-b251-44bc90c50e87" time="1392985926913" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +91,10 @@
       <file leaf-file-name="SynchronizedQueue.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="0.72148544">
-              <folding />
+            <state line="12" column="5" selection-start="352" selection-end="352" vertical-scroll-proportion="0.505618">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,16 +102,79 @@
       <file leaf-file-name="Customer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/Customer.java">
           <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="13" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EyeTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/EyeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="18" selection-start="18" selection-end="18" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Passport.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/Passport.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="13" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Licensor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/Licensor.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriversLicense.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/licensing/DriversLicense.java">
+      <file leaf-file-name="AbstractAgent.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/AbstractAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+            <state line="8" column="39" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmiratesId.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/EmiratesId.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="9" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UAEDriversLicense.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/UAEDriversLicense.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="13" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Translator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="10" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -134,6 +199,14 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/licensing/Customer.java" />
+        <option value="$PROJECT_DIR$/src/licensing/DriversLicense.java" />
+        <option value="$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.java" />
+        <option value="$PROJECT_DIR$/src/licensing/DriversLicenseTranslation.java" />
+        <option value="$PROJECT_DIR$/src/licensing/EmiratesId.java" />
+        <option value="$PROJECT_DIR$/src/licensing/EyeTest.java" />
+        <option value="$PROJECT_DIR$/src/licensing/Passport.java" />
+        <option value="$PROJECT_DIR$/src/licensing/UAEDriversLicense.java" />
+        <option value="$PROJECT_DIR$/src/licensing/AbstractAgent.java" />
         <option value="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
       </list>
     </option>
@@ -411,24 +484,96 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="18" selection-start="18" selection-end="18" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/DriversLicense.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+        <state line="3" column="13" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/DriversLicenseTranslation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="18" selection-start="18" selection-end="18" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="13" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/EyeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="18" selection-start="18" selection-end="18" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/EmiratesId.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="9" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/Passport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="13" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/UAEDriversLicense.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="10" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/Licensor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/AbstractAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="39" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="0.72148544">
-          <folding />
+        <state line="12" column="5" selection-start="352" selection-end="352" vertical-scroll-proportion="0.505618">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,5 +1,13 @@
+package licensing;
 
 public abstract class AbstractAgent implements Runnable {
+
+    private int minWait;
+    private int maxWait;
+
+    public int getAverageWait() {
+        return (minWait + maxWait) / 2;
+    }
 
 	AbstractAgent() 
 	{
