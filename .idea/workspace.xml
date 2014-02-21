@@ -2,7 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="980eea3b-d973-437f-b251-44bc90c50e87" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/AbstractAgent.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/Customer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/DriversLicense.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/DriversLicenseTranslation.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/EmiratesId.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/EyeTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/Passport.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/AbstractAgent.java" afterPath="$PROJECT_DIR$/src/licensing/AbstractAgent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.java" afterPath="$PROJECT_DIR$/src/licensing/AbstractPrimaryDocument.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Customer.java" afterPath="$PROJECT_DIR$/src/licensing/Customer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/DriversLicense.java" afterPath="$PROJECT_DIR$/src/licensing/DriversLicense.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/DriversLicenseTranslation.java" afterPath="$PROJECT_DIR$/src/licensing/DriversLicenseTranslation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/EmiratesId.java" afterPath="$PROJECT_DIR$/src/licensing/EmiratesId.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/EyeTest.java" afterPath="$PROJECT_DIR$/src/licensing/EyeTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Passport.java" afterPath="$PROJECT_DIR$/src/licensing/Passport.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" afterPath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Translator.java" afterPath="$PROJECT_DIR$/src/licensing/Translator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/UAEDriversLicense.java" afterPath="$PROJECT_DIR$/src/licensing/UAEDriversLicense.java" />
     </list>
     <ignored path="cs209-ass1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,7 +91,7 @@
       <file leaf-file-name="SynchronizedQueue.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="51" selection-end="51" vertical-scroll-proportion="0.0397878">
+            <state line="26" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="0.72148544">
               <folding />
             </state>
           </provider>
@@ -81,7 +100,7 @@
       <file leaf-file-name="Customer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/Customer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="20" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -90,7 +109,7 @@
       <file leaf-file-name="DriversLicense.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/DriversLicense.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="13" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0">
+            <state line="3" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -394,21 +413,21 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/licensing/DriversLicense.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0">
+        <state line="3" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="20" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="51" selection-end="51" vertical-scroll-proportion="0.0397878">
+        <state line="26" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="0.72148544">
           <folding />
         </state>
       </provider>

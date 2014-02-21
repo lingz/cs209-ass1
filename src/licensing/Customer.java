@@ -1,5 +1,3 @@
-package assignment1;
-
 // All members public for simplicity - no setters/getters, null by default
 public class Customer {
     public EmiratesId emiratesId = null;

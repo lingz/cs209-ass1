@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.LinkedList;
 
@@ -23,3 +24,4 @@ public class SynchronizedQueue extends ConcurrentLinkedQueue<Customer>{
     }
 
 }
+

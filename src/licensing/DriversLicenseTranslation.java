@@ -1,4 +1,3 @@
-package assignment1;
 
 public class DriversLicenseTranslation {
     public DriversLicense driversLicense;
