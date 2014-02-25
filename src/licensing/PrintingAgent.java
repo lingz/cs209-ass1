@@ -1,14 +1,14 @@
 package licensing;
 
 public class PrintingAgent {
-	private SynchronizedQueue printQueue;
-	private SynchronizedQueue failureVector;
-	private SynchronizedQueue successVector;
+	private SynchronizedQueue<Customer> printQueue;
+	private SynchronizedQueue<Customer> failureVector;
+	private SynchronizedQueue<Customer> successVector;
 	private int numCustomers;
 
     private Printer printer;
 
-	public PrintingAgent(SynchronizedQueue printQueue, SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector, int numCustomers)
+	public PrintingAgent(SynchronizedQueue<Customer> printQueue, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector, int numCustomers)
 	{
 		this.failureVector=failureVector;
 		this.successVector=successVector;
