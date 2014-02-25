@@ -1,14 +1,16 @@
+package licensing;
+
 import java.util.*;
 
 class EyeTester extends AbstractAgent {
-	private SynchronizedQueue licenseQueue; 
-	private SynchronizedQueue eyeTestQueue;
-	private SynchronizedQueue translatorQueue; 
-	private SynchronizedQueue failureVector;
-	private SynchronizedQueue successVector;
+	private SynchronizedQueue<Customer> licenseQueue; 
+	private SynchronizedQueue<Customer> eyeTestQueue;
+	private SynchronizedQueue<Customer> translatorQueue; 
+	private SynchronizedQueue<Customer> failureVector;
+	private SynchronizedQueue<Customer> successVector;
 	private int numCustomers;
 	 
-	public EyeTester(int numCustomers, SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector) 
+	public EyeTester(int numCustomers, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector) 
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;
@@ -18,7 +20,7 @@ class EyeTester extends AbstractAgent {
 		this.numCustomers=numCustomers;
 	}	
 	
-	public void eyeTest(Customer customer) 
+	public void eyeTest(Customer customer)
 	{
 	
         String emiratesIdNumber = UUID.randomUUID().toString();
@@ -32,7 +34,7 @@ class EyeTester extends AbstractAgent {
 			Thread.sleep(12 + (int)(Math.random()*19));
 			//This may be bad code because I'm creating a new customer each iteration
 			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
-			Customer customer = eyeTestQueue.pull();
+			Customer customer = eyeTestQueue.poll();
 			if(customer!=null)
 			{
 				eyeTest(customer);
