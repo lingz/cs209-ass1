@@ -2,9 +2,11 @@ package licensing;
 
 import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.Queue;
 
 // A synchronized queue using a linkedList, but with the synchronized keyword to make operations threadsafe
-public class SynchronizedQueue extends LinkedList<Customer>{
+// Is a blocking queue, such that if the list is empty, it will hang the calling thread until it is no longer empty.
+public class SynchronizedQueue extends LinkedList<Customer> implements Queue<Customer>{
     private LinkedList<AbstractAgent> agents;
 
     public SynchronizedQueue() {
@@ -20,11 +22,22 @@ public class SynchronizedQueue extends LinkedList<Customer>{
         agents.remove(agent);
     }
 
+    // This uses notifyAll, to alert waiting threads
     public synchronized boolean add(Customer customer) {
+        if (this.agents.size() == 0) {
+            notifyAll();
+        }
         return super.add(customer);
     }
 
     public synchronized Customer poll() {
+        while (this.agents.size() == 0) {
+            try {
+                wait();
+            } catch (InterruptedException exception) {
+                return null;
+            }
+        }
         return super.poll();
     }
 

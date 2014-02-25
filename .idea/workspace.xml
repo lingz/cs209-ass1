@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="980eea3b-d973-437f-b251-44bc90c50e87" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Main.java" afterPath="$PROJECT_DIR$/src/licensing/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Receptionist.java" afterPath="$PROJECT_DIR$/src/licensing/Receptionist.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" afterPath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cs209-ass1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,19 +71,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SynchronizedQueue.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SynchronizedQueue.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="53" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="825">
-              <folding />
+            <state line="26" column="53" selection-start="922" selection-end="922" vertical-scroll-proportion="0.37603992" vertical-offset="164" max-vertical-offset="1035">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Receptionist.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Receptionist.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/Receptionist.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="51" selection-start="2465" selection-end="2465" vertical-scroll-proportion="1.7970049" vertical-offset="0" max-vertical-offset="1245">
+            <state line="4" column="113" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
               <folding />
             </state>
           </provider>
@@ -158,7 +157,7 @@
       <file leaf-file-name="Translator.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="47" selection-start="903" selection-end="921" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="810">
+            <state line="48" column="47" selection-start="1464" selection-end="1464" vertical-scroll-proportion="0.0" vertical-offset="222" max-vertical-offset="810">
               <folding />
             </state>
           </provider>
@@ -192,8 +191,8 @@
         <option value="$PROJECT_DIR$/src/licensing/UAEDriversLicense.java" />
         <option value="$PROJECT_DIR$/src/licensing/AbstractAgent.java" />
         <option value="$PROJECT_DIR$/src/licensing/Main.java" />
-        <option value="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
         <option value="$PROJECT_DIR$/src/licensing/Receptionist.java" />
+        <option value="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
       </list>
     </option>
   </component>
@@ -433,7 +432,9 @@
     <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="53" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="825">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -584,16 +585,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
+    <entry file="file://$PROJECT_DIR$/src/licensing/Receptionist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="47" selection-start="903" selection-end="921" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="53" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="825">
+        <state line="4" column="113" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
           <folding />
         </state>
       </provider>
@@ -605,10 +599,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/licensing/Receptionist.java">
+    <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="51" selection-start="2465" selection-end="2465" vertical-scroll-proportion="1.7970049" vertical-offset="0" max-vertical-offset="1245">
+        <state line="48" column="47" selection-start="1464" selection-end="1464" vertical-scroll-proportion="0.0" vertical-offset="222" max-vertical-offset="810">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/SynchronizedQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="53" selection-start="922" selection-end="922" vertical-scroll-proportion="0.37603992" vertical-offset="164" max-vertical-offset="1035">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
