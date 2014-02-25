@@ -1,14 +1,15 @@
+package licensing;
 import java.util.*;
 
 class Translator extends AbstractAgent {
-	private SynchronizedQueue licenseQueue; 
-	private SynchronizedQueue eyeTestQueue;
-	private SynchronizedQueue translatorQueue; 
-	private SynchronizedQueue failureVector;
-	private SynchronizedQueue successVector;
+	private SynchronizedQueue<Customer> licenseQueue; 
+	private SynchronizedQueue<Customer> eyeTestQueue;
+	private SynchronizedQueue<Customer> translatorQueue; 
+	private SynchronizedQueue<Customer> failureVector;
+	private SynchronizedQueue<Customer> successVector;
 	private int numCustomers;
 	 
-	public Translator(int numCustomers, SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector) 
+	public Translator(int numCustomers, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector) 
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;

@@ -18,18 +18,18 @@ public class Main {
     private static final int NUM_TRANSLATORS = 5;
     private static final int NUM_PRINTERS = 5;
 
-    private static SynchronizedQueue customerQueue; // handled by Receptionist
-    private static SynchronizedQueue licensingQueue; // handled by Licensor
-    private static SynchronizedQueue eyeTestingQueue; // handled by EyeTester
-    private static SynchronizedQueue translatingQueue; // handled by Translator
-    private static SynchronizedQueue printingQueue; // handled by PrintingAgent
+    private static SynchronizedQueue<Customer> customerQueue; // handled by Receptionist
+    private static SynchronizedQueue<Customer> licensingQueue; // handled by Licensor
+    private static SynchronizedQueue<Customer> eyeTestingQueue; // handled by EyeTester
+    private static SynchronizedQueue<Customer> translatingQueue; // handled by Translator
+    private static SynchronizedQueue<Customer> printingQueue; // handled by PrintingAgent
 
     private static Printer [] printerArray = new Printer[NUM_PRINTERS];
     // WRONG THERE ARE MULTIPLE PRINTER AGENTS AND MULTIPLE ÚPRONTERS
     // EACH PRINTER HAS ONE AGENT AND THEY COORDINATE
 
-    private static SynchronizedQueue successQueue;
-    private static SynchronizedQueue failureQueue;
+    private static SynchronizedQueue<Customer> successQueue;
+    private static SynchronizedQueue<Customer> failureQueue;
 
     public static void main(String args[]) {
         initializeCustomers(customerQueue, NUM_CUSTOMERS);
@@ -75,7 +75,7 @@ public class Main {
     }
 
     private static void initializeCustomers(
-            SynchronizedQueue customerQueue, int numCustomers
+            SynchronizedQueue<Customer> customerQueue, int numCustomers
             ) {
         String firstName = randomName();
         String lastName = randomName();

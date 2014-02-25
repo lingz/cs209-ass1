@@ -6,7 +6,7 @@ import java.util.Queue;
 
 // A synchronized queue using a linkedList, but with the synchronized keyword to make operations threadsafe
 // Is a blocking queue, such that if the list is empty, it will hang the calling thread until it is no longer empty.
-public class SynchronizedQueue extends LinkedList<Customer> implements Queue<Customer>{
+public class SynchronizedQueue<E> extends LinkedList<E> implements Queue<E>{
     private LinkedList<AbstractAgent> agents;
 
     public SynchronizedQueue() {
@@ -23,14 +23,14 @@ public class SynchronizedQueue extends LinkedList<Customer> implements Queue<Cus
     }
 
     // This uses notifyAll, to alert waiting threads
-    public synchronized boolean add(Customer customer) {
+    public synchronized boolean add(E object) {
         if (this.agents.size() == 0) {
             notifyAll();
         }
-        return super.add(customer);
+        return super.add(object);
     }
 
-    public synchronized Customer poll() {
+    public synchronized E poll() {
         while (this.agents.size() == 0) {
             try {
                 wait();

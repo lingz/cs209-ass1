@@ -3,12 +3,12 @@ import java.util.LinkedList;
 import java.util.Vector;
 
 public class Receptionist extends AbstractAgent{
-    SynchronizedQueue customerQueue;
-    SynchronizedQueue licensingQueue;
-    SynchronizedQueue eyeTestingQueue;
-    SynchronizedQueue translatingQueue;
-    SynchronizedQueue successQueue;
-    SynchronizedQueue failureQueue;
+    SynchronizedQueue<Customer> customerQueue;
+    SynchronizedQueue<Customer> licensingQueue;
+    SynchronizedQueue<Customer> eyeTestingQueue;
+    SynchronizedQueue<Customer> translatingQueue;
+    SynchronizedQueue<Customer> successQueue;
+    SynchronizedQueue<Customer> failureQueue;
 
 
     // Options for strategy are 'RANDOM' for random placement, 'PEEK' for picking the queue with the lowest time by
@@ -26,7 +26,7 @@ public class Receptionist extends AbstractAgent{
 
     // Strategy pattern for placing the customer
     private void placeCustomer(Customer customer) {
-        SynchronizedQueue targetQueue;
+        SynchronizedQueue<Customer> targetQueue;
         if (STRATEGY == "RANDOM") {
             targetQueue = randomQueue();
         } else if (STRATEGY == "PEEK") {
@@ -40,7 +40,7 @@ public class Receptionist extends AbstractAgent{
         targetQueue.push(customer);
     }
 
-    private SynchronizedQueue randomQueue() {
+    private SynchronizedQueue<Customer> randomQueue() {
         if (Math.random() < 0.5) {
             return eyeTestingQueue;
         } else {
@@ -48,7 +48,7 @@ public class Receptionist extends AbstractAgent{
         }
     }
 
-    private SynchronizedQueue peekQueue() {
+    private SynchronizedQueue<Customer> peekQueue() {
         if (eyeTestingQueue.peekTime() < translatingQueue.peekTime())  {
             return eyeTestingQueue;
         } else {
@@ -56,7 +56,7 @@ public class Receptionist extends AbstractAgent{
         }
     }
 
-    private SynchronizedQueue fewestQueue() {
+    private SynchronizedQueue<Customer> fewestQueue() {
         if (eyeTestingQueue.size() < translatingQueue.size()) {
             return eyeTestingQueue;
         } else {

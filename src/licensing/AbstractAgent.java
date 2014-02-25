@@ -17,13 +17,13 @@ public abstract class AbstractAgent implements Runnable {
 	
 	public abstract void run(); 
 
-	public Customer pull(SynchronizedQueue queue) 
+	public Customer pull(SynchronizedQueue<Customer> queue) 
 	{
 		Customer customer = queue.remove();
 		return customer;
 	}
 	
-	public void push(SynchronizedQueue queue, Customer customer)
+	public void push(SynchronizedQueue<Customer> queue, Customer customer)
 	{
 		queue.add(customer);
 	}
