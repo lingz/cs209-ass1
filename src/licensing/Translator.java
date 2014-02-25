@@ -31,7 +31,7 @@ class Translator extends AbstractAgent {
 			Thread.sleep(12 + (int)(Math.random()*19));
 			//This may be bad code because I'm creating a new customer each iteration
 			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
-			Customer customer = translatorQueue.pull();
+			Customer customer = translatorQueue.poll();
 			if(customer!=null)
 			{
 				translate(customer);

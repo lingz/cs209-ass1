@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="980eea3b-d973-437f-b251-44bc90c50e87" name="Default" comment="Synchronized queue is now generic">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/AbstractAgent.java" afterPath="$PROJECT_DIR$/src/licensing/AbstractAgent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/EyeTester.java" afterPath="$PROJECT_DIR$/src/licensing/EyeTester.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Licensor.java" afterPath="$PROJECT_DIR$/src/licensing/Licensor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Main.java" afterPath="$PROJECT_DIR$/src/licensing/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Receptionist.java" afterPath="$PROJECT_DIR$/src/licensing/Receptionist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" afterPath="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Translator.java" afterPath="$PROJECT_DIR$/src/licensing/Translator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cs209-ass1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -164,7 +159,7 @@
       <file leaf-file-name="Translator.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="28" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.24064171" vertical-offset="315" max-vertical-offset="825">
+            <state line="34" column="49" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.5213904" vertical-offset="315" max-vertical-offset="825">
               <folding />
             </state>
           </provider>
@@ -621,7 +616,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="28" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.24064171" vertical-offset="315" max-vertical-offset="825">
+        <state line="34" column="49" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.5213904" vertical-offset="315" max-vertical-offset="825">
           <folding />
         </state>
       </provider>

@@ -37,7 +37,7 @@ class Licensor extends AbstractAgent {
 			Thread.sleep(12 + (int)(Math.random()*19));
 			//This may be bad code because I'm creating a new customer each iteration
 			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
-			Customer customer = licenseQueue.pull();
+			Customer customer = licenseQueue.poll();
 			if(customer!=null)
 			{
 				if(license(customer))
