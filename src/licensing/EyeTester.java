@@ -7,10 +7,15 @@ class EyeTester extends AbstractAgent {
 	private SynchronizedQueue<Customer> eyeTestQueue;
 	private SynchronizedQueue<Customer> translatorQueue; 
 	private SynchronizedQueue<Customer> failureVector;
-	private SynchronizedQueue<Customer> successVector;
+	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
 	 
-	public EyeTester(SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector, int numCustomers) 
+	public EyeTester(SynchronizedQueue<Customer> eyeTestQueue,
+            SynchronizedQueue<Customer> translatorQueue,
+            SynchronizedQueue<Customer> licenseQueue,
+            SynchronizedQueue<UAEDriversLicense> successVector,
+            SynchronizedQueue<Customer> failureVector,
+            int numCustomers)
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;
@@ -24,14 +29,24 @@ class EyeTester extends AbstractAgent {
 	{
 	
         String emiratesIdNumber = UUID.randomUUID().toString();
-		customer.eyeTest = new EyeTest(customer.firstName,customer.lastName,customer.nationality,customer.gender,customer.dateOfBirth,customer.expiryDate,emiratesIdNumber);	
+		customer.eyeTest = new EyeTest(customer.emiratesId.firstName,
+                customer.emiratesId.lastName,
+                customer.emiratesId.nationality,
+                customer.emiratesId.gender,
+                customer.emiratesId.dateOfBirth,
+                customer.emiratesId.expiryDate,
+                emiratesIdNumber);
 	}
 
 	public void run() {
 		
 		while((failureVector.size()+successVector.size())!=numCustomers)	
 		{
-			Thread.sleep(12 + (int)(Math.random()*19));
+			try {
+    			Thread.sleep(12 + (int)(Math.random()*19));
+            } catch (InterruptedException ex) {
+
+            }
 			//This may be bad code because I'm creating a new customer each iteration
 			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
 			Customer customer = eyeTestQueue.poll();

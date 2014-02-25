@@ -1,26 +1,25 @@
 package licensing;
 
-public class PrintingAgent {
+public class PrintingAgent implements Runnable {
 	private SynchronizedQueue<Customer> printQueue;
 	private SynchronizedQueue<Customer> failureVector;
-	private SynchronizedQueue<Customer> successVector;
+	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
 
     private Printer printer;
 
-	public PrintingAgent(SynchronizedQueue<Customer> printQueue, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector, int numCustomers)
+	public PrintingAgent(SynchronizedQueue printQueue,
+            SynchronizedQueue successVector,
+            SynchronizedQueue failureVector,
+            int numCustomers)
 	{
 		this.failureVector=failureVector;
 		this.successVector=successVector;
 		this.numCustomers=numCustomers;
 		this.printQueue=printQueue;
 
-        printer = (new Thread(new Printer(
-                customerQueue,
-                licensingQueue, eyeTestingQueue, translatingQueue,
-                successQueue, failureQueue, NUM_CUSTOMERS
-                )));
-        printer.start();
+        printer = new Printer();
+        new Thread(printer).start();
 	}
 
 	public boolean license(Customer customer)
@@ -37,13 +36,17 @@ public class PrintingAgent {
 		while((failureVector.size()+successVector.size())!=numCustomers)
 		{
             while (!printer.isIdle()) {
-                Thread.sleep(10);
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+
+                }
             }
 
-			Customer customer = printQueue.pull();
+			Customer customer = printQueue.poll();
 			if(customer!=null)
 			{
-				printer.print(customer, successQueue);
+				printer.print(customer, successVector);
 			}
 		}
     }

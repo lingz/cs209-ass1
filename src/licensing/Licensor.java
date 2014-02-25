@@ -8,11 +8,17 @@ class Licensor extends AbstractAgent {
 	private SynchronizedQueue<Customer> translatorQueue;
 	private SynchronizedQueue<Customer> printQueue;
 	private SynchronizedQueue<Customer> failureVector;
-	private SynchronizedQueue<Customer> successVector;
+	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
 	 
 
-	public Licensor(SynchronizedQueue<Customer> printQueue, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector, int numCustomers) 
+	public Licensor(SynchronizedQueue<Customer> licenseQueue,
+            SynchronizedQueue<Customer> eyeTestQueue,
+            SynchronizedQueue<Customer> translatorQueue,
+            SynchronizedQueue<Customer> printQueue,
+            SynchronizedQueue<UAEDriversLicense> successVector,
+            SynchronizedQueue<Customer> failureVector,
+            int numCustomers)
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;
@@ -37,7 +43,11 @@ class Licensor extends AbstractAgent {
 		
 		while((failureVector.size()+successVector.size())!=numCustomers)	
 		{
-            Thread.sleep(12 + (int)(Math.random()*19));
+            try {
+    			Thread.sleep(12 + (int)(Math.random()*19));
+            } catch (InterruptedException ex) {
+
+            }
 			//This may be bad code because I'm creating a new customer each iteration
 			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
 			Customer customer = licenseQueue.poll();

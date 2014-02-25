@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="980eea3b-d973-437f-b251-44bc90c50e87" name="Default" comment="Synchronized queue is now generic">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/licensing/ThreadTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/EyeTester.java" afterPath="$PROJECT_DIR$/src/licensing/EyeTester.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Licensor.java" afterPath="$PROJECT_DIR$/src/licensing/Licensor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Main.java" afterPath="$PROJECT_DIR$/src/licensing/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/PrintingAgent.java" afterPath="$PROJECT_DIR$/src/licensing/PrintingAgent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/licensing/Translator.java" afterPath="$PROJECT_DIR$/src/licensing/Translator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cs209-ass1.iws" />
@@ -84,7 +89,7 @@
       <file leaf-file-name="Licensor.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/Licensor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="1020">
+            <state line="2" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
@@ -102,8 +107,16 @@
       <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="21" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2310">
-              <folding />
+            <state line="4" column="19" selection-start="59" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2310">
+              <folding>
+                <element signature="e#484#494#0" expanded="true" />
+                <element signature="e#610#620#0" expanded="true" />
+                <element signature="e#733#743#0" expanded="true" />
+                <element signature="e#858#868#0" expanded="true" />
+                <element signature="e#981#991#0" expanded="true" />
+                <element signature="e#1116#1135#0" expanded="true" />
+                <element signature="e#1223#1233#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,7 +124,7 @@
       <file leaf-file-name="PrintingAgent.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/licensing/PrintingAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="67" selection-start="894" selection-end="894" vertical-scroll-proportion="0.684492" vertical-offset="44" max-vertical-offset="840">
+            <state line="16" column="84" selection-start="535" selection-end="535" vertical-scroll-proportion="0.62015504" vertical-offset="0" max-vertical-offset="885">
               <folding />
             </state>
           </provider>
@@ -147,7 +160,7 @@
       <file leaf-file-name="Translator.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="49" selection-start="1382" selection-end="1382" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="840">
+            <state line="44" column="49" selection-start="1543" selection-end="1543" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="975">
               <folding />
             </state>
           </provider>
@@ -189,11 +202,11 @@
         <option value="$PROJECT_DIR$/src/licensing/Passport.java" />
         <option value="$PROJECT_DIR$/src/licensing/UAEDriversLicense.java" />
         <option value="$PROJECT_DIR$/src/licensing/AbstractAgent.java" />
-        <option value="$PROJECT_DIR$/src/licensing/Main.java" />
         <option value="$PROJECT_DIR$/src/licensing/Receptionist.java" />
         <option value="$PROJECT_DIR$/src/licensing/SynchronizedQueue.java" />
         <option value="$PROJECT_DIR$/src/licensing/Translator.java" />
         <option value="$PROJECT_DIR$/src/licensing/PrintingAgent.java" />
+        <option value="$PROJECT_DIR$/src/licensing/Main.java" />
       </list>
     </option>
   </component>
@@ -480,7 +493,15 @@
     <entry file="file://$PROJECT_DIR$/src/licensing/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="21" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2475">
-          <folding />
+          <folding>
+            <element signature="e#484#494#0" expanded="true" />
+            <element signature="e#610#620#0" expanded="true" />
+            <element signature="e#733#743#0" expanded="true" />
+            <element signature="e#858#868#0" expanded="true" />
+            <element signature="e#981#991#0" expanded="true" />
+            <element signature="e#1116#1135#0" expanded="true" />
+            <element signature="e#1223#1233#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -591,7 +612,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/Translator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="49" selection-start="1382" selection-end="1382" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="840">
+        <state line="44" column="49" selection-start="1543" selection-end="1543" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="975">
           <folding />
         </state>
       </provider>
@@ -612,13 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/licensing/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="21" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2310">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/Printer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="13" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
@@ -626,9 +640,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/licensing/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="59" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2310">
+          <folding>
+            <element signature="e#484#494#0" expanded="true" />
+            <element signature="e#610#620#0" expanded="true" />
+            <element signature="e#733#743#0" expanded="true" />
+            <element signature="e#858#868#0" expanded="true" />
+            <element signature="e#981#991#0" expanded="true" />
+            <element signature="e#1116#1135#0" expanded="true" />
+            <element signature="e#1223#1233#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/licensing/PrintingAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="67" selection-start="894" selection-end="894" vertical-scroll-proportion="0.684492" vertical-offset="44" max-vertical-offset="840">
+        <state line="16" column="84" selection-start="535" selection-end="535" vertical-scroll-proportion="0.62015504" vertical-offset="0" max-vertical-offset="885">
           <folding />
         </state>
       </provider>
