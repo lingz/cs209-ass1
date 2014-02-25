@@ -17,4 +17,9 @@ public class Customer {
         this.eyeTest = eyeTest;
         this.driversLicenseTranslation = driversLicenseTranslation;
 	}
+
+    @Override
+    public String toString() {
+        return (passport.firstName + " " + passport.lastName);
+    }
 }

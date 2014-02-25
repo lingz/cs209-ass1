@@ -1,35 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+package licensing;
 
 import java.util.*;
 
-/**
- *
- * @author Zbynek Stara
- */
 public class Main {
     private static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
     private static final int NUM_CUSTOMERS = 100;
+    
     private static final int NUM_LICENSORS = 5;
     private static final int NUM_EYE_TESTERS = 5;
     private static final int NUM_TRANSLATORS = 5;
     private static final int NUM_PRINTERS = 5;
 
-    private static SynchronizedQueue customerQueue; // handled by Receptionist
-    private static SynchronizedQueue licensingQueue; // handled by Licensor
-    private static SynchronizedQueue eyeTestingQueue; // handled by EyeTester
-    private static SynchronizedQueue translatingQueue; // handled by Translator
-    private static SynchronizedQueue printingQueue; // handled by PrintingAgent
+    private static SynchronizedQueue<Customer> customerQueue; // handled by Receptionist
+    private static SynchronizedQueue<Customer> licensingQueue; // handled by Licensor
+    private static SynchronizedQueue<Customer> eyeTestingQueue; // handled by EyeTester
+    private static SynchronizedQueue<Customer> translatingQueue; // handled by Translator
+    private static SynchronizedQueue<Customer> printingQueue; // handled by PrintingAgent
 
-    private static Printer [] printerArray = new Printer[NUM_PRINTERS];
-    // WRONG THERE ARE MULTIPLE PRINTER AGENTS AND MULTIPLE ÚPRONTERS
-    // EACH PRINTER HAS ONE AGENT AND THEY COORDINATE
-
-    private static SynchronizedQueue successQueue;
-    private static SynchronizedQueue failureQueue;
+    private static SynchronizedQueue<UAEDriversLicense> successQueue;
+    private static SynchronizedQueue<Customer> failureQueue;
 
     public static void main(String args[]) {
         initializeCustomers(customerQueue, NUM_CUSTOMERS);
@@ -64,14 +54,12 @@ public class Main {
                     ))).start();
         }
 
-        initializePrinters(
-                printerArray,
-                successQueue, failureQueue, NUM_CUSTOMERS
-                );
-
-        (new Thread(new PrintingAgent(
-                printingQueue, printerArray, NUM_CUSTOMERS
-                ))).start();
+        for (int i = 0; i < NUM_PRINTERS; i++) {
+            (new Thread(new PrintingAgent(
+                    printingQueue,
+                    successQueue, failureQueue, NUM_CUSTOMERS
+                    ))).start();
+        }
     }
 
     private static void initializeCustomers(
@@ -103,7 +91,7 @@ public class Main {
             if ((i % 13) == 0) {
                 driversLicense = null;
             }
-            if ((i % 17) == 0) {
+            if ((i % 15) == 0) {
                 emiratesId = null;
             }
 

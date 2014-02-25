@@ -1,3 +1,5 @@
+package licensing;
+
 import java.util.*;
 
 class Translator extends AbstractAgent {
@@ -8,7 +10,7 @@ class Translator extends AbstractAgent {
 	private SynchronizedQueue successVector;
 	private int numCustomers;
 	 
-	public Translator(int numCustomers, SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector) 
+	public Translator(SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector, int numCustomers)
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;
@@ -23,7 +25,7 @@ class Translator extends AbstractAgent {
 		customer.driversLicenseTranslation = new DriversLicenseTranslation(customer.driversLicense);	
 	}
 
-	public void run() throws InterruptException{
+	public void run() {
 		
 		while((failureVector.size()+successVector.size())!=numCustomers)	
 		{

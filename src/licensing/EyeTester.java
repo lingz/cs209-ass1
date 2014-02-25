@@ -1,3 +1,5 @@
+package licensing;
+
 import java.util.*;
 
 class EyeTester extends AbstractAgent {
@@ -8,7 +10,7 @@ class EyeTester extends AbstractAgent {
 	private SynchronizedQueue successVector;
 	private int numCustomers;
 	 
-	public EyeTester(int numCustomers, SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector) 
+	public EyeTester(SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector, int numCustomers)
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;
@@ -18,7 +20,7 @@ class EyeTester extends AbstractAgent {
 		this.numCustomers=numCustomers;
 	}	
 	
-	public void eyeTest(Customer customer) 
+	public void eyeTest(Customer customer)
 	{
 	
         String emiratesIdNumber = UUID.randomUUID().toString();
