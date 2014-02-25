@@ -1,6 +1,6 @@
 package licensing;
 
-public class PrintingAgent {
+public class PrintingAgent implements Runnable {
 	private SynchronizedQueue<Customer> printQueue;
 	private SynchronizedQueue<Customer> failureVector;
 	private SynchronizedQueue<UAEDriversLicense> successVector;
@@ -8,7 +8,10 @@ public class PrintingAgent {
 
     private Printer printer;
 
-	public PrintingAgent(SynchronizedQueue printQueue, SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector, int numCustomers)
+	public PrintingAgent(SynchronizedQueue printQueue,
+            SynchronizedQueue successVector,
+            SynchronizedQueue failureVector,
+            int numCustomers)
 	{
 		this.failureVector=failureVector;
 		this.successVector=successVector;
@@ -33,7 +36,11 @@ public class PrintingAgent {
 		while((failureVector.size()+successVector.size())!=numCustomers)
 		{
             while (!printer.isIdle()) {
-                Thread.sleep(10);
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+
+                }
             }
 
 			Customer customer = printQueue.poll();

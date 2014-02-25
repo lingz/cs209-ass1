@@ -72,7 +72,7 @@ public class Main {
         char gender = randomGender();
         Date dateOfBirth = randomDate(new Date(0));
         Date expiryDate = randomDate(new Date(System.currentTimeMillis()));
-        int idNumber = randomId();
+        String idNumber = randomId();
 
         EmiratesId emiratesId = new EmiratesId(
                 firstName,lastName,nationality,gender,dateOfBirth,expiryDate,
@@ -137,12 +137,12 @@ public class Main {
         return randomDate;
     }
 
-    private static int randomId() {
+    private static String randomId() {
         int randomId = 0;
         for (int i = 0; i < 9; i++) {
             int currentPower = ((int) Math.pow((double) 10, (double) i));
             randomId += (currentPower * ((int) (Math.random()*10)));
         }
-        return randomId;
+        return randomId+"";
     }
 }
