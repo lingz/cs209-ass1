@@ -43,7 +43,8 @@ public class SynchronizedQueue<E> extends LinkedList<E> implements Queue<E>{
 
 
     // The queue will guess the waiting time for the next customer
-    public double peekTime() {
+    public double peekTime() 
+    {
         // Naive algorithm that estimates the waiting time by doing the agent count over the sum of the wait times
         // for each of the agents (to get the customers / second rate) multiplied by the number of people in the queue
 
