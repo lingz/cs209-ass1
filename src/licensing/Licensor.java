@@ -8,11 +8,11 @@ class Licensor extends AbstractAgent {
 	private SynchronizedQueue<Customer> translatorQueue;
 	private SynchronizedQueue<Customer> printQueue;
 	private SynchronizedQueue<Customer> failureVector;
-	private SynchronizedQueue<Customer> successVector;
+	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
 	 
 
-	public Licensor(SynchronizedQueue<Customer> printQueue, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector, int numCustomers) 
+	public Licensor(SynchronizedQueue<Customer> printQueue, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<UAEDriversLicense> successVector, int numCustomers)
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;

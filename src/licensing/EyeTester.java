@@ -7,10 +7,10 @@ class EyeTester extends AbstractAgent {
 	private SynchronizedQueue<Customer> eyeTestQueue;
 	private SynchronizedQueue<Customer> translatorQueue; 
 	private SynchronizedQueue<Customer> failureVector;
-	private SynchronizedQueue<Customer> successVector;
+	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
 	 
-	public EyeTester(SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector, int numCustomers) 
+	public EyeTester(SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<UAEDriversLicense> successVector, int numCustomers)
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;

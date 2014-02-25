@@ -1,9 +1,9 @@
 package licensing;
 
 public class PrintingAgent {
-	private SynchronizedQueue printQueue;
-	private SynchronizedQueue failureVector;
-	private SynchronizedQueue successVector;
+	private SynchronizedQueue<Customer> printQueue;
+	private SynchronizedQueue<Customer> failureVector;
+	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
 
     private Printer printer;
@@ -15,12 +15,8 @@ public class PrintingAgent {
 		this.numCustomers=numCustomers;
 		this.printQueue=printQueue;
 
-        printer = (new Thread(new Printer(
-                customerQueue,
-                licensingQueue, eyeTestingQueue, translatingQueue,
-                successQueue, failureQueue, NUM_CUSTOMERS
-                )));
-        printer.start();
+        printer = new Printer();
+        new Thread(printer).start();
 	}
 
 	public boolean license(Customer customer)
@@ -40,10 +36,10 @@ public class PrintingAgent {
                 Thread.sleep(10);
             }
 
-			Customer customer = printQueue.pull();
+			Customer customer = printQueue.poll();
 			if(customer!=null)
 			{
-				printer.print(customer, successQueue);
+				printer.print(customer, successVector);
 			}
 		}
     }
