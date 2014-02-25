@@ -1,10 +1,10 @@
 package licensing;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.LinkedList;
 import java.util.Iterator;
 
-public class SynchronizedQueue extends ConcurrentLinkedQueue<Customer>{
+// A synchronized queue using a linkedList, but with the synchronized keyword to make operations threadsafe
+public class SynchronizedQueue extends LinkedList<Customer>{
     private LinkedList<AbstractAgent> agents;
 
     public SynchronizedQueue() {
@@ -12,13 +12,22 @@ public class SynchronizedQueue extends ConcurrentLinkedQueue<Customer>{
         agents = new LinkedList<AbstractAgent>();
     }
 
-    public void registerAgent(AbstractAgent agent) {
+    public synchronized void registerAgent(AbstractAgent agent) {
         agents.push(agent);
     }
 
-    public void deregisterAgent(AbstractAgent agent) {
+    public synchronized void deregisterAgent(AbstractAgent agent) {
         agents.remove(agent);
     }
+
+    public synchronized boolean add(Customer customer) {
+        return super.add(customer);
+    }
+
+    public synchronized Customer poll() {
+        return super.poll();
+    }
+
 
     // The queue will guess the waiting time for the next customer
     public double peekTime() {
