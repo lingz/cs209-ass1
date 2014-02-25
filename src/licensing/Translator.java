@@ -44,6 +44,11 @@ class Translator extends AbstractAgent {
 			Customer customer = translatorQueue.poll();
 			if(customer!=null)
 			{
+				if(customer.emiratesId == null || customer.driversLicense == null || customer.passport==null)
+				{	
+					failureVector.add(customer);
+					continue;
+				}
 				translate(customer);
 				if(customer.eyeTest==null)
 				{

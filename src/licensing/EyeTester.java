@@ -52,6 +52,11 @@ class EyeTester extends AbstractAgent {
 			Customer customer = eyeTestQueue.poll();
 			if(customer!=null)
 			{
+				if(customer.emiratesId == null || customer.driversLicense == null || customer.passport==null)
+				{	
+					failureVector.add(customer);
+					continue;
+				}
 				eyeTest(customer);
 				if(customer.driversLicenseTranslation==null)
 				{
