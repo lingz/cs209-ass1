@@ -19,6 +19,7 @@ public class Main {
     private static SynchronizedQueue<Customer> printingQueue; // handled by PrintingAgent
 
     private static SynchronizedQueue<UAEDriversLicense> successQueue;
+
     private static SynchronizedQueue<Customer> failureQueue;
 
     public static void main(String args[]) {
@@ -63,7 +64,7 @@ public class Main {
     }
 
     private static void initializeCustomers(
-            SynchronizedQueue customerQueue, int numCustomers
+            SynchronizedQueue<Customer> customerQueue, int numCustomers
             ) {
         String firstName = randomName();
         String lastName = randomName();

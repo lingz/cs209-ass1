@@ -3,15 +3,16 @@ package licensing;
 import java.util.*;
 
 class Licensor extends AbstractAgent {
-	private SynchronizedQueue licenseQueue; 
-	private SynchronizedQueue eyeTestQueue;
-	private SynchronizedQueue translatorQueue;
-	private SynchronizedQueue printQueue;
-	private SynchronizedQueue failureVector;
-	private SynchronizedQueue successVector;
+	private SynchronizedQueue<Customer> licenseQueue; 
+	private SynchronizedQueue<Customer> eyeTestQueue;
+	private SynchronizedQueue<Customer> translatorQueue;
+	private SynchronizedQueue<Customer> printQueue;
+	private SynchronizedQueue<Customer> failureVector;
+	private SynchronizedQueue<Customer> successVector;
 	private int numCustomers;
 	 
-	public Licensor(SynchronizedQueue printQueue, SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector, int numCustomers)
+
+	public Licensor(SynchronizedQueue<Customer> printQueue, int numCustomers, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector) 
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;
@@ -39,7 +40,7 @@ class Licensor extends AbstractAgent {
             Thread.sleep(12 + (int)(Math.random()*19));
 			//This may be bad code because I'm creating a new customer each iteration
 			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
-			Customer customer = licenseQueue.pull();
+			Customer customer = licenseQueue.poll();
 			if(customer!=null)
 			{
 				if(license(customer))

@@ -3,14 +3,14 @@ package licensing;
 import java.util.*;
 
 class Translator extends AbstractAgent {
-	private SynchronizedQueue licenseQueue; 
-	private SynchronizedQueue eyeTestQueue;
-	private SynchronizedQueue translatorQueue; 
-	private SynchronizedQueue failureVector;
-	private SynchronizedQueue successVector;
+	private SynchronizedQueue<Customer> licenseQueue; 
+	private SynchronizedQueue<Customer> eyeTestQueue;
+	private SynchronizedQueue<Customer> translatorQueue; 
+	private SynchronizedQueue<Customer> failureVector;
+	private SynchronizedQueue<Customer> successVector;
 	private int numCustomers;
 	 
-	public Translator(SynchronizedQueue licenseQueue,  SynchronizedQueue eyeTestQueue, SynchronizedQueue translatorQueue, SynchronizedQueue failureVector, SynchronizedQueue successVector, int numCustomers)
+	public Translator(int numCustomers, SynchronizedQueue<Customer> licenseQueue,  SynchronizedQueue<Customer> eyeTestQueue, SynchronizedQueue<Customer> translatorQueue, SynchronizedQueue<Customer> failureVector, SynchronizedQueue<Customer> successVector) 
 	{
 		this.licenseQueue=licenseQueue;
 		this.eyeTestQueue=eyeTestQueue;
@@ -32,7 +32,7 @@ class Translator extends AbstractAgent {
 			Thread.sleep(12 + (int)(Math.random()*19));
 			//This may be bad code because I'm creating a new customer each iteration
 			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
-			Customer customer = translatorQueue.pull();
+			Customer customer = translatorQueue.poll();
 			if(customer!=null)
 			{
 				translate(customer);
