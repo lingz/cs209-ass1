@@ -7,7 +7,7 @@ public class Receptionist extends AbstractAgent{
     SynchronizedQueue<Customer> licensingQueue;
     SynchronizedQueue<Customer> eyeTestingQueue;
     SynchronizedQueue<Customer> translatingQueue;
-    SynchronizedQueue<Customer> successQueue;
+    SynchronizedQueue<UAEDriversLicense> successQueue;
     SynchronizedQueue<Customer> failureQueue;
 
 
@@ -17,6 +17,16 @@ public class Receptionist extends AbstractAgent{
 
     int numCustomers;
 
+	Receptionist(SynchronizedQueue<Customer> customerQueue,SynchronizedQueue<Customer> licensingQueue, SynchronizedQueue<Customer> eyeTestingQueue, SynchronizedQueue<Customer> translatingQueue, SynchronizedQueue<UAEDriversLicense> successQueue, SynchronizedQueue<Customer> failureQueue, int numCustomers)
+	{
+		this.customerQueue=customerQueue;
+		this.licensingQueue=licensingQueue;
+		this.eyeTestingQueue=eyeTestingQueue; 
+		this.translatingQueue=translatingQueue; 
+		this.successQueue=successQueue; 
+		this.failureQueue=failureQueue;
+		this.numCustomers=numCustomers;
+	}
     // Check if a customer has all the correct documents (but not if those documents are correct).
     // It has a 40% failure rate of checking, to simulate people reporting bad answers.
     private boolean checkCustomer(Customer customer) {
