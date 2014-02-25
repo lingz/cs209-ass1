@@ -25,12 +25,6 @@ public class Main {
     public static void main(String args[]) {
         initializeCustomers(customerQueue, NUM_CUSTOMERS);
 
-        (new Thread(new Receptionist(
-                customerQueue,
-                licensingQueue, eyeTestingQueue, translatingQueue,
-                successQueue, failureQueue, NUM_CUSTOMERS
-                ))).start();
-
         for (int i = 0; i < NUM_LICENSORS; i++) {
             (new Thread(new Licensor(
                     licensingQueue,
@@ -61,31 +55,44 @@ public class Main {
                     successQueue, failureQueue, NUM_CUSTOMERS
                     ))).start();
         }
+
+        (new Thread(new Receptionist(
+                // Options for strategy are 'RANDOM' for random placement, 'PEEK' for picking the queue with the lowest time by
+                // peaking at the queues, and 'FEWEST' for picking the queue with the least number of people in it.
+                "PEEK",
+                customerQueue,
+                licensingQueue, eyeTestingQueue, translatingQueue,
+                successQueue, failureQueue, NUM_CUSTOMERS
+                ))).start();
     }
 
     private static void initializeCustomers(
             SynchronizedQueue<Customer> customerQueue, int numCustomers
             ) {
-        String firstName = randomName();
-        String lastName = randomName();
-        String nationality = randomNationality();
-        char gender = randomGender();
-        Date dateOfBirth = randomDate(new Date(0));
-        Date expiryDate = randomDate(new Date(System.currentTimeMillis()));
-        String idNumber = randomId();
-
-        EmiratesId emiratesId = new EmiratesId(
-                firstName,lastName,nationality,gender,dateOfBirth,expiryDate,
-                idNumber
-                );
-        DriversLicense driversLicense = new DriversLicense(
-                firstName,lastName,nationality,gender,dateOfBirth,expiryDate
-                );
-        Passport passport = new Passport(
-                firstName,lastName,nationality,gender,dateOfBirth,expiryDate
-                );
+        String firstName;
+        String lastName;
+        String nationality;
+        char gender;
+        Date dateOfBirth;
+        Date expiryDate;
+        String idNumber;
 
         for (int i = 0; i < numCustomers; i++) {
+            firstName = randomName();
+            lastName = randomName();
+            nationality = randomNationality();
+            gender = randomGender();
+            dateOfBirth = randomDate(new Date(0));
+            expiryDate = randomDate(new Date(System.currentTimeMillis()));
+            idNumber = randomId();
+
+            EmiratesId emiratesId = new EmiratesId(
+                    firstName, lastName, nationality, gender, dateOfBirth, expiryDate,
+                    idNumber);
+            DriversLicense driversLicense = new DriversLicense(
+                    firstName, lastName, nationality, gender, dateOfBirth, expiryDate);
+            Passport passport = new Passport(
+                    firstName, lastName, nationality, gender, dateOfBirth, expiryDate);
             if ((i % 11) == 0) {
                 passport = null;
             }

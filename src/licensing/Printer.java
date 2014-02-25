@@ -6,9 +6,9 @@ public class Printer implements Runnable {
     private boolean isOn = true;
     private SynchronizedQueue<UAEDriversLicense> successQueue;
 
-    Printer()
+    Printer(SynchronizedQueue<UAEDriversLicense> successQueue)
 	{
-
+        this.successQueue = successQueue;
 	}
 
 	public void run() {
@@ -38,12 +38,12 @@ public class Printer implements Runnable {
 	{
         UAEDriversLicense dl = new UAEDriversLicense(activeJob);
         try {
-            Thread.sleep(30);
+            Thread.sleep(300);
         } catch (InterruptedException ex) {
 
         }
         successQueue.add(dl);
-        System.out.println(activeJob + "");
+        System.out.println("SUCCESS ON: " + activeJob + "");
         activeJob = null;
         isIdle = true;
 	}

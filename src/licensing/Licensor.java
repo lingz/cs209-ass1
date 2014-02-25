@@ -10,6 +10,9 @@ class Licensor extends AbstractAgent {
 	private SynchronizedQueue<Customer> failureVector;
 	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
+
+    protected int minWait = 120;
+    protected int maxWait = 300;
 	 
 
 	public Licensor(SynchronizedQueue<Customer> licenseQueue,
@@ -27,6 +30,8 @@ class Licensor extends AbstractAgent {
 		this.successVector=successVector;
 		this.numCustomers=numCustomers;
 		this.printQueue=printQueue;
+
+        licenseQueue.registerAgent(this);
 	}	
 	
 	public boolean license(Customer customer)
@@ -41,15 +46,11 @@ class Licensor extends AbstractAgent {
 
 	public void run() {
 		
-		while((failureVector.size()+successVector.size())!=numCustomers)	
+		while((failureVector.size()+successVector.size())!=numCustomers)
 		{
-            try {
-    			Thread.sleep(12 + (int)(Math.random()*19));
-            } catch (InterruptedException ex) {
-
-            }
-			//This may be bad code because I'm creating a new customer each iteration
-			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
+            //System.out.println("licensor: "+failureVector.size()+"; "+successVector.size()+"; "+numCustomers);
+            process();
+            
 			Customer customer = licenseQueue.poll();
 			if(customer!=null)
 			{
@@ -63,10 +64,11 @@ class Licensor extends AbstractAgent {
 				}
 				if(customer.driversLicenseTranslation==null)
 				{
-					licenseQueue.add(customer);
+					translatorQueue.add(customer);
 				}
 				printQueue.add(customer);
 			}
 		}
+        //System.out.println("LICENSOR TERMINATED");
     }
 }

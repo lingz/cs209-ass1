@@ -9,6 +9,9 @@ class EyeTester extends AbstractAgent {
 	private SynchronizedQueue<Customer> failureVector;
 	private SynchronizedQueue<UAEDriversLicense> successVector;
 	private int numCustomers;
+
+    protected int minWait = 120;
+    protected int maxWait = 300;
 	 
 	public EyeTester(SynchronizedQueue<Customer> eyeTestQueue,
             SynchronizedQueue<Customer> translatorQueue,
@@ -23,6 +26,8 @@ class EyeTester extends AbstractAgent {
 		this.failureVector=failureVector;
 		this.successVector=successVector;
 		this.numCustomers=numCustomers;
+
+        eyeTestQueue.registerAgent(this);
 	}	
 	
 	public void eyeTest(Customer customer)
@@ -42,13 +47,7 @@ class EyeTester extends AbstractAgent {
 		
 		while((failureVector.size()+successVector.size())!=numCustomers)	
 		{
-			try {
-    			Thread.sleep(12 + (int)(Math.random()*19));
-            } catch (InterruptedException ex) {
-
-            }
-			//This may be bad code because I'm creating a new customer each iteration
-			//Can I safely reuse customer without changing the value added to the license/eyetest queues?
+			process();
 			Customer customer = eyeTestQueue.poll();
 			if(customer!=null)
 			{

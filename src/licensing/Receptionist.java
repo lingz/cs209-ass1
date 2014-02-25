@@ -13,12 +13,13 @@ public class Receptionist extends AbstractAgent{
 
     // Options for strategy are 'RANDOM' for random placement, 'PEEK' for picking the queue with the lowest time by
     // peaking at the queues, and 'FEWEST' for picking the queue with the least number of people in it.
-    private static String STRATEGY = "RANDOM";
+    private static String STRATEGY;
 
     int numCustomers;
 
-	Receptionist(SynchronizedQueue<Customer> customerQueue,SynchronizedQueue<Customer> licensingQueue, SynchronizedQueue<Customer> eyeTestingQueue, SynchronizedQueue<Customer> translatingQueue, SynchronizedQueue<UAEDriversLicense> successQueue, SynchronizedQueue<Customer> failureQueue, int numCustomers)
+	Receptionist(String strategy, SynchronizedQueue<Customer> customerQueue,SynchronizedQueue<Customer> licensingQueue, SynchronizedQueue<Customer> eyeTestingQueue, SynchronizedQueue<Customer> translatingQueue, SynchronizedQueue<UAEDriversLicense> successQueue, SynchronizedQueue<Customer> failureQueue, int numCustomers)
 	{
+        this.STRATEGY=strategy;
 		this.customerQueue=customerQueue;
 		this.licensingQueue=licensingQueue;
 		this.eyeTestingQueue=eyeTestingQueue; 
@@ -79,7 +80,7 @@ public class Receptionist extends AbstractAgent{
         while (!customerQueue.isEmpty()) {
             placeCustomer(customerQueue.poll());
             try {
-                Thread.sleep((long) (Math.random()*20 - 10));
+                Thread.sleep((long) (Math.random()*20 + 10));
             } catch (InterruptedException exception)  {
             }
 

@@ -18,7 +18,7 @@ public class PrintingAgent implements Runnable {
 		this.numCustomers=numCustomers;
 		this.printQueue=printQueue;
 
-        printer = new Printer();
+        printer = new Printer(successVector);
         new Thread(printer).start();
 	}
 
@@ -35,9 +35,10 @@ public class PrintingAgent implements Runnable {
 	public void run() {
 		while((failureVector.size()+successVector.size())!=numCustomers)
 		{
+            //System.out.println("pa: "+failureVector.size()+"; "+successVector.size()+"; "+numCustomers);
             while (!printer.isIdle()) {
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
 
                 }
@@ -46,8 +47,10 @@ public class PrintingAgent implements Runnable {
 			Customer customer = printQueue.poll();
 			if(customer!=null)
 			{
-				printer.print(customer, successVector);
+				printer.print(customer);
 			}
 		}
+        printer.turnOff();
+        //System.out.println("PA TERMINATED");
     }
 }

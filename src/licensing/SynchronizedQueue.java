@@ -24,20 +24,21 @@ public class SynchronizedQueue<E> extends LinkedList<E> implements Queue<E>{
 
     // This uses notifyAll, to alert waiting threads
     public synchronized boolean add(E object) {
-        if (this.agents.size() == 0) {
+        /*if (this.size() == 0) {
             notifyAll();
-        }
+        }*/
         return super.add(object);
     }
 
     public synchronized E poll() {
-        while (this.agents.size() == 0) {
+        /*while (this.size() == 0) {
             try {
                 wait();
             } catch (InterruptedException exception) {
                 return null;
             }
-        }
+        }*/
+        if (this.size() == 0) return null;
         return super.poll();
     }
 
@@ -56,6 +57,7 @@ public class SynchronizedQueue<E> extends LinkedList<E> implements Queue<E>{
             waitSum += agentIterator.next().getAverageWait();
         }
 
+        if (waitSum == 0) return 0;
         return size() * (agents.size() / waitSum);
     }
 
