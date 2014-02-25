@@ -37,6 +37,11 @@ public class Receptionist extends AbstractAgent{
 
     // Strategy pattern for placing the customer
     private void placeCustomer(Customer customer) {
+        if (!checkCustomer(customer)) {
+            failureQueue.add(customer);
+            System.out.println("FAILURE AT RECEPTIONIST");
+            return;
+        }
         SynchronizedQueue<Customer> targetQueue;
         if (STRATEGY == "RANDOM") {
             targetQueue = randomQueue();

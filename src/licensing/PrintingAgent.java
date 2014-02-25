@@ -8,6 +8,8 @@ public class PrintingAgent implements Runnable {
 
     private Printer printer;
 
+    public static boolean isFinished = false;
+
 	public PrintingAgent(SynchronizedQueue printQueue,
             SynchronizedQueue successVector,
             SynchronizedQueue failureVector,
@@ -21,6 +23,13 @@ public class PrintingAgent implements Runnable {
         printer = new Printer(successVector);
         new Thread(printer).start();
 	}
+
+    private synchronized void signalResults() {
+        if (!isFinished) {
+            System.out.println("TOTAL STATS: "+failureVector.size()+" failures, "+successVector.size()+" successes ("+numCustomers+" total)");
+            isFinished = true;
+        }
+    }
 
 	public boolean license(Customer customer)
 	{
@@ -51,6 +60,7 @@ public class PrintingAgent implements Runnable {
 			}
 		}
         printer.turnOff();
+        signalResults();
         //System.out.println("PA TERMINATED");
     }
 }

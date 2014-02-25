@@ -57,6 +57,8 @@ class Licensor extends AbstractAgent {
 				if(license(customer))
 				{
 					failureVector.add(customer);
+                    System.out.println("FAILURE AT LICENSING");
+                    continue;
 				}
 				if(customer.eyeTest==null)
 				{

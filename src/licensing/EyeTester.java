@@ -54,6 +54,7 @@ class EyeTester extends AbstractAgent {
 				if(customer.emiratesId == null || customer.driversLicense == null || customer.passport==null)
 				{	
 					failureVector.add(customer);
+                    System.out.println("FAILURE AT EYE-TESTING");
 					continue;
 				}
 				eyeTest(customer);

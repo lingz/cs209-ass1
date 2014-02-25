@@ -46,6 +46,7 @@ class Translator extends AbstractAgent {
 				if(customer.emiratesId == null || customer.driversLicense == null || customer.passport==null)
 				{	
 					failureVector.add(customer);
+                    System.out.println("FAILURE AT TRANSLATING");
 					continue;
 				}
 				translate(customer);
