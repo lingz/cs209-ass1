@@ -19,7 +19,6 @@ public class Main {
     private static SynchronizedQueue<Customer> printingQueue = new SynchronizedQueue<Customer>(); // handled by PrintingAgent
 
     private static SynchronizedQueue<UAEDriversLicense> successQueue = new SynchronizedQueue<UAEDriversLicense>();
-
     private static SynchronizedQueue<Customer> failureQueue = new SynchronizedQueue<Customer>();
 
     public static void main(String args[]) {
@@ -31,6 +30,7 @@ public class Main {
                     eyeTestingQueue, translatingQueue, printingQueue,
                     successQueue, failureQueue, NUM_CUSTOMERS
                     ))).start();
+            System.out.println("Licensor thread started.");
         }
 
         for (int i = 0; i < NUM_EYE_TESTERS; i++) {
@@ -39,6 +39,7 @@ public class Main {
                     translatingQueue, licensingQueue,
                     successQueue, failureQueue, NUM_CUSTOMERS
                     ))).start();
+            System.out.println("Eye tester thread started.");
         }
 
         for (int i = 0; i < NUM_TRANSLATORS; i++) {
@@ -47,6 +48,7 @@ public class Main {
                     eyeTestingQueue, licensingQueue,
                     successQueue, failureQueue, NUM_CUSTOMERS
                     ))).start();
+            System.out.println("Translator thread started.");
         }
 
         for (int i = 0; i < NUM_PRINTERS; i++) {
@@ -54,6 +56,7 @@ public class Main {
                     printingQueue,
                     successQueue, failureQueue, NUM_CUSTOMERS
                     ))).start();
+            System.out.println("Printing agent thread started.");
         }
 
         (new Thread(new Receptionist(
@@ -64,6 +67,7 @@ public class Main {
                 licensingQueue, eyeTestingQueue, translatingQueue,
                 successQueue, failureQueue, NUM_CUSTOMERS
                 ))).start();
+        System.out.println("Receptionist thread started.");
     }
 
     private static void initializeCustomers(
@@ -110,14 +114,18 @@ public class Main {
 
             customerQueue.add(newCustomer);
         }
+
+        System.out.println("Customers intialized.");
     }
 
     private static String randomName() {
         String randomName = "";
         for (int i = 0; i < 6; i++) {
             char addChar = ALPHABET[(int) (Math.random()*26)];
-            if (i == 0) Character.toUpperCase(addChar);
-            randomName += addChar;
+            if (i == 0) {
+                addChar = Character.toUpperCase(addChar);
+            }
+            randomName += addChar+"";
         }
         return randomName;
     }

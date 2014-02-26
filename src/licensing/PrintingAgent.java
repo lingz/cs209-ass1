@@ -1,50 +1,51 @@
 package licensing;
 
 public class PrintingAgent implements Runnable {
-	private SynchronizedQueue<Customer> printQueue;
-	private SynchronizedQueue<Customer> failureVector;
-	private SynchronizedQueue<UAEDriversLicense> successVector;
+	private SynchronizedQueue<Customer> printingQueue;
+	private SynchronizedQueue<Customer> failureQueue;
+	private SynchronizedQueue<UAEDriversLicense> successQueue;
 	private int numCustomers;
-
     private Printer printer;
-
     public static boolean isFinished = false;
 
-	public PrintingAgent(SynchronizedQueue printQueue,
-            SynchronizedQueue successVector,
-            SynchronizedQueue failureVector,
-            int numCustomers)
-	{
-		this.failureVector=failureVector;
-		this.successVector=successVector;
-		this.numCustomers=numCustomers;
-		this.printQueue=printQueue;
+	public PrintingAgent(SynchronizedQueue printingQueue,
+            SynchronizedQueue successQueue,
+            SynchronizedQueue failureQueue,
+            int numCustomers) {
+		this.failureQueue = failureQueue;
+		this.successQueue = successQueue;
+		this.numCustomers = numCustomers;
+		this.printingQueue = printingQueue;
 
-        printer = new Printer(successVector);
+        printer = new Printer(successQueue);
         new Thread(printer).start();
 	}
 
     private synchronized void signalResults() {
         if (!isFinished) {
-            System.out.println("TOTAL STATS: "+failureVector.size()+" failures, "+successVector.size()+" successes ("+numCustomers+" total)");
+            System.out.println("TOTAL STATS: "+
+                    failureQueue.size()+" failures, "+
+                    successQueue.size()+" successes "+
+                    "("+numCustomers+" total)");
             isFinished = true;
         }
     }
 
-	public boolean license(Customer customer)
-	{
-		if(customer.emiratesId == null || customer.driversLicense == null || customer.passport==null)
-		{
-			return true;
-		}
-		return false;
+	public boolean documentsCorrect(Customer customer) {
+		if(customer.emiratesId == null ||
+                customer.driversLicense == null ||
+                customer.passport==null) {
+			return false;
+		} else {
+            return true;
+        }
 	}
 
 
 	public void run() {
-		while((failureVector.size()+successVector.size())!=numCustomers)
+		while((failureQueue.size()+successQueue.size())!=numCustomers)
 		{
-            //System.out.println("pa: "+failureVector.size()+"; "+successVector.size()+"; "+numCustomers);
+            //System.out.println("pa: "+failureQueue.size()+"; "+successQueue.size()+"; "+numCustomers);
             while (!printer.isIdle()) {
                 try {
                     Thread.sleep(100);
@@ -53,7 +54,7 @@ public class PrintingAgent implements Runnable {
                 }
             }
 
-			Customer customer = printQueue.poll();
+			Customer customer = printingQueue.poll();
 			if(customer!=null)
 			{
 				printer.print(customer);
@@ -61,6 +62,6 @@ public class PrintingAgent implements Runnable {
 		}
         printer.turnOff();
         signalResults();
-        //System.out.println("PA TERMINATED");
+        System.out.println("Printing agent terminated.");
     }
 }

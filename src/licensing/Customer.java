@@ -20,6 +20,10 @@ public class Customer {
 
     @Override
     public String toString() {
-        return (passport.firstName + " " + passport.lastName);
+        if (passport != null) {
+            return (passport.firstName + " " + passport.lastName);
+        } else {
+            return "<customer with no passport>";
+        }
     }
 }

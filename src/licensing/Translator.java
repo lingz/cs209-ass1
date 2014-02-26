@@ -1,64 +1,70 @@
 package licensing;
 
-import java.util.*;
-
 class Translator extends AbstractAgent {
-	private SynchronizedQueue<Customer> licenseQueue; 
-	private SynchronizedQueue<Customer> eyeTestQueue;
-	private SynchronizedQueue<Customer> translatorQueue; 
-	private SynchronizedQueue<Customer> failureVector;
-	private SynchronizedQueue<UAEDriversLicense> successVector;
+	private SynchronizedQueue<Customer> licensingQueue;
+	private SynchronizedQueue<Customer> eyeTestingQueue;
+	private SynchronizedQueue<Customer> translatingQueue;
+    private SynchronizedQueue<UAEDriversLicense> successQueue;
+	private SynchronizedQueue<Customer> failureQueue;
 	private int numCustomers;
 
     protected int minWait = 300;
     protected int maxWait = 600;
 	 
-	public Translator(SynchronizedQueue<Customer> translatorQueue,
-            SynchronizedQueue<Customer> eyeTestQueue,
-            SynchronizedQueue<Customer> licenseQueue,
-            SynchronizedQueue<UAEDriversLicense> successVector,
-            SynchronizedQueue<Customer> failureVector,
-            int numCustomers)
-	{
-		this.licenseQueue=licenseQueue;
-		this.eyeTestQueue=eyeTestQueue;
-		this.translatorQueue=translatorQueue;
-		this.failureVector=failureVector;
-		this.successVector=successVector;
-		this.numCustomers=numCustomers;
+	public Translator(SynchronizedQueue<Customer> translatingQueue,
+            SynchronizedQueue<Customer> eyeTestingQueue,
+            SynchronizedQueue<Customer> licensingQueue,
+            SynchronizedQueue<UAEDriversLicense> successQueue,
+            SynchronizedQueue<Customer> failureQueue,
+            int numCustomers) {
+		this.licensingQueue = licensingQueue;
+		this.eyeTestingQueue = eyeTestingQueue;
+		this.translatingQueue = translatingQueue;
+        this.successQueue = successQueue;
+		this.failureQueue = failureQueue;
+		this.numCustomers = numCustomers;
 
-        translatorQueue.registerAgent(this);
+        translatingQueue.registerAgent(this);
 	}	
-	
-	public void translate(Customer customer) 
-	{
+
+    public boolean documentsCorrect(Customer customer) {
+		if(customer.emiratesId == null ||
+                customer.driversLicense == null ||
+                customer.passport==null) {
+			return false;
+		} else {
+            return true;
+        }
+	}
+
+	public void translate(Customer customer) {
 		customer.driversLicenseTranslation = new DriversLicenseTranslation(customer.driversLicense);	
 	}
 
-	public void run() {
-		
-		while((failureVector.size()+successVector.size())!=numCustomers)	
-		{
+	public void run() {	
+		while ((failureQueue.size() + successQueue.size()) != numCustomers) {
+			Customer customer = translatingQueue.poll();
+
             process();
-			Customer customer = translatorQueue.poll();
-			if(customer!=null)
-			{
-				if(customer.emiratesId == null || customer.driversLicense == null || customer.passport==null)
-				{	
-					failureVector.add(customer);
-                    System.out.println("FAILURE AT TRANSLATING");
+
+			if (customer != null) {
+				if (!documentsCorrect(customer)) {
+					failureQueue.add(customer);
+                    System.out.println("FAILURE AT TRANSLATING FOR: " + customer);
 					continue;
 				}
+
 				translate(customer);
-				if(customer.eyeTest==null)
-				{
-					eyeTestQueue.add(customer);
-				}
-				else
-				{
-					licenseQueue.add(customer);
+
+				if(customer.eyeTest == null) {
+                    System.out.println("Sent to eye testing (by translator): " + customer);
+					eyeTestingQueue.add(customer);
+				} else {
+                    System.out.println("Sent to licensing (by translator): " + customer);
+					licensingQueue.add(customer);
 				}
 			}
-		}		
+		}
+        System.out.println("Translator terminated.");
 	}
 }

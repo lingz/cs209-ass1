@@ -22,30 +22,19 @@ public class SynchronizedQueue<E> extends LinkedList<E> implements Queue<E>{
         agents.remove(agent);
     }
 
-    // This uses notifyAll, to alert waiting threads
+    @Override
     public synchronized boolean add(E object) {
-        /*if (this.size() == 0) {
-            notifyAll();
-        }*/
         return super.add(object);
     }
 
+    @Override
     public synchronized E poll() {
-        /*while (this.size() == 0) {
-            try {
-                wait();
-            } catch (InterruptedException exception) {
-                return null;
-            }
-        }*/
         if (this.size() == 0) return null;
         return super.poll();
     }
 
-
     // The queue will guess the waiting time for the next customer
-    public double peekTime() 
-    {
+    public double peekTime() {
         // Naive algorithm that estimates the waiting time by doing the agent count over the sum of the wait times
         // for each of the agents (to get the customers / second rate) multiplied by the number of people in the queue
 
@@ -57,10 +46,11 @@ public class SynchronizedQueue<E> extends LinkedList<E> implements Queue<E>{
             waitSum += agentIterator.next().getAverageWait();
         }
 
-        if (waitSum == 0) return 0;
-        return size() * (agents.size() / waitSum);
+        if (waitSum == 0) {
+            return 0;
+        } else {
+            return size() * (agents.size() / waitSum);
+        }
     }
-
-
 }
 

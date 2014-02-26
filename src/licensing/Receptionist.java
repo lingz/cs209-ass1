@@ -1,59 +1,70 @@
 package licensing;
-import java.util.LinkedList;
-import java.util.Vector;
 
 public class Receptionist extends AbstractAgent{
-    SynchronizedQueue<Customer> customerQueue;
-    SynchronizedQueue<Customer> licensingQueue;
-    SynchronizedQueue<Customer> eyeTestingQueue;
-    SynchronizedQueue<Customer> translatingQueue;
-    SynchronizedQueue<UAEDriversLicense> successQueue;
-    SynchronizedQueue<Customer> failureQueue;
-
+    private SynchronizedQueue<Customer> customerQueue;
+    private SynchronizedQueue<Customer> licensingQueue;
+    private SynchronizedQueue<Customer> eyeTestingQueue;
+    private SynchronizedQueue<Customer> translatingQueue;
+    private SynchronizedQueue<UAEDriversLicense> successQueue;
+    private SynchronizedQueue<Customer> failureQueue;
+    private int numCustomers;
 
     // Options for strategy are 'RANDOM' for random placement, 'PEEK' for picking the queue with the lowest time by
     // peaking at the queues, and 'FEWEST' for picking the queue with the least number of people in it.
     private static String STRATEGY;
 
-    int numCustomers;
-
-	Receptionist(String strategy, SynchronizedQueue<Customer> customerQueue,SynchronizedQueue<Customer> licensingQueue, SynchronizedQueue<Customer> eyeTestingQueue, SynchronizedQueue<Customer> translatingQueue, SynchronizedQueue<UAEDriversLicense> successQueue, SynchronizedQueue<Customer> failureQueue, int numCustomers)
-	{
-        this.STRATEGY=strategy;
-		this.customerQueue=customerQueue;
-		this.licensingQueue=licensingQueue;
-		this.eyeTestingQueue=eyeTestingQueue; 
-		this.translatingQueue=translatingQueue; 
-		this.successQueue=successQueue; 
-		this.failureQueue=failureQueue;
-		this.numCustomers=numCustomers;
+	Receptionist(String strategy,
+            SynchronizedQueue<Customer> customerQueue,
+            SynchronizedQueue<Customer> licensingQueue,
+            SynchronizedQueue<Customer> eyeTestingQueue,
+            SynchronizedQueue<Customer> translatingQueue,
+            SynchronizedQueue<UAEDriversLicense> successQueue,
+            SynchronizedQueue<Customer> failureQueue,
+            int numCustomers) {
+        this.STRATEGY = strategy;
+		this.customerQueue = customerQueue;
+		this.licensingQueue = licensingQueue;
+		this.eyeTestingQueue = eyeTestingQueue;
+		this.translatingQueue = translatingQueue;
+		this.successQueue = successQueue;
+		this.failureQueue = failureQueue;
+		this.numCustomers = numCustomers;
 	}
+
     // Check if a customer has all the correct documents (but not if those documents are correct).
     // It has a 40% failure rate of checking, to simulate people reporting bad answers.
-    private boolean checkCustomer(Customer customer) {
-        return ((customer.driversLicense != null && customer.emiratesId != null && customer.passport != null) ||
-                (((int) (Math.random()*5)) > 3) );
+    private boolean hasDocuments(Customer customer) {
+        if ((customer.driversLicense != null &&
+                customer.emiratesId != null &&
+                customer.passport != null) ||
+                (((int) (Math.random()*5)) > 3)) { // possible to pass even without documents
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Strategy pattern for placing the customer
     private void placeCustomer(Customer customer) {
-        if (!checkCustomer(customer)) {
+        if (!hasDocuments(customer)) {
             failureQueue.add(customer);
-            System.out.println("FAILURE AT RECEPTIONIST");
+            System.out.println("FAILURE AT RECEPTIONIST FOR: " + customer);
             return;
-        }
-        SynchronizedQueue<Customer> targetQueue;
-        if (STRATEGY == "RANDOM") {
-            targetQueue = randomQueue();
-        } else if (STRATEGY == "PEEK") {
-            targetQueue = peekQueue();
-        } else if (STRATEGY == "FEWEST") {
-            targetQueue = fewestQueue();
         } else {
-            // Default
-            targetQueue = randomQueue();
+            SynchronizedQueue<Customer> targetQueue;
+            
+            if (STRATEGY.equals("RANDOM")) {
+                targetQueue = randomQueue();
+            } else if (STRATEGY.equals("PEEK")) {
+                targetQueue = peekQueue();
+            } else if (STRATEGY.equals("FEWEST")) {
+                targetQueue = fewestQueue();
+            } else { // default
+                targetQueue = randomQueue();
+            }
+
+            targetQueue.push(customer);
         }
-        targetQueue.push(customer);
     }
 
     private SynchronizedQueue<Customer> randomQueue() {
@@ -84,11 +95,13 @@ public class Receptionist extends AbstractAgent{
     public void run() {
         while (!customerQueue.isEmpty()) {
             placeCustomer(customerQueue.poll());
+            
             try {
                 Thread.sleep((long) (Math.random()*20 + 10));
             } catch (InterruptedException exception)  {
+                // ignore
             }
-
         }
-    };
+        System.out.println("Recptionist terminated (customer queue empty).");
+    }
 }
