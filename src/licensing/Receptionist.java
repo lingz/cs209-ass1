@@ -1,6 +1,6 @@
 package licensing;
 
-public class Receptionist extends AbstractAgent{
+public class Receptionist implements Runnable {
     private SynchronizedQueue<Customer> customerQueue;
     private SynchronizedQueue<Customer> licensingQueue;
     private SynchronizedQueue<Customer> eyeTestingQueue;
@@ -45,10 +45,13 @@ public class Receptionist extends AbstractAgent{
     }
 
     // Strategy pattern for placing the customer
-    private void placeCustomer(Customer customer) {
+    private void placeCustomer(Customer customer) { // doesn't care about eye tests or translations
         if (!hasDocuments(customer)) {
             failureQueue.add(customer);
             System.out.println("FAILURE AT RECEPTIONIST FOR: " + customer);
+            System.out.println("("+successQueue.size()+" successes, "+
+                    failureQueue.size()+" failures, "+
+                    numCustomers+" in total)");
             return;
         } else {
             SynchronizedQueue<Customer> targetQueue;
@@ -63,45 +66,70 @@ public class Receptionist extends AbstractAgent{
                 targetQueue = randomQueue();
             }
 
+            System.out.println("\tAllowed to pass (by receptionist): "+customer);
             targetQueue.push(customer);
         }
     }
 
     private SynchronizedQueue<Customer> randomQueue() {
-        if (Math.random() < 0.5) {
+        double random = Math.random();
+        if (random < 0.33) {
             return eyeTestingQueue;
-        } else {
+        } else if (random < 0.66) {
             return translatingQueue;
+        } else {
+            return licensingQueue;
         }
     }
 
     private SynchronizedQueue<Customer> peekQueue() {
-        if (eyeTestingQueue.peekTime() < translatingQueue.peekTime())  {
+        if (eyeTestingQueue.peekTime() <= translatingQueue.peekTime() &&
+                eyeTestingQueue.peekTime() <= licensingQueue.peekTime())  {
             return eyeTestingQueue;
-        } else {
+        } else if (translatingQueue.peekTime() <= eyeTestingQueue.peekTime() &&
+                translatingQueue.peekTime() <= licensingQueue.peekTime())  {
             return translatingQueue;
+        } else {
+            return licensingQueue;
         }
     }
 
     private SynchronizedQueue<Customer> fewestQueue() {
-        if (eyeTestingQueue.size() < translatingQueue.size()) {
+        if (eyeTestingQueue.size() <= translatingQueue.size() &&
+                eyeTestingQueue.size() <= licensingQueue.size()) {
             return eyeTestingQueue;
-        } else {
+        } else if (translatingQueue.size() <= eyeTestingQueue.size() &&
+                translatingQueue.size() <= licensingQueue.size()) {
             return translatingQueue;
+        } else {
+            return licensingQueue;
         }
-
     }
 
     public void run() {
-        while (!customerQueue.isEmpty()) {
-            placeCustomer(customerQueue.poll());
-            
-            try {
-                Thread.sleep((long) (Math.random()*20 + 10));
-            } catch (InterruptedException exception)  {
-                // ignore
+        while ((failureQueue.size() + successQueue.size()) != numCustomers) {
+            Customer customer = customerQueue.poll();
+
+            if (customer != null) {
+                System.out.println("\tCustomer processed by receptionist: " + customer);
+
+                try {
+                    // takes between 5 and 10 seconds
+                    Thread.sleep((long) (Math.random() * 5000 + 5000));
+                } catch (InterruptedException ex) {
+                    // ignore
+                }
+
+                placeCustomer(customer);
+            } else {
+                try {
+                    // try again in 10 seconds to avoid busy-waiting
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                    // ignore
+                }
             }
         }
-        System.out.println("Recptionist terminated (customer queue empty).");
+        System.out.println("\tRecptionist terminated.");
     }
 }

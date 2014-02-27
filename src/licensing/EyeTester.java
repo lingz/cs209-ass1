@@ -10,8 +10,8 @@ class EyeTester extends AbstractAgent {
 	private SynchronizedQueue<Customer> failureQueue;
 	private int numCustomers;
 
-    protected int minWait = 120;
-    protected int maxWait = 300;
+    protected int minWait = 120000;
+    protected int maxWait = 300000;
 	 
 	public EyeTester(SynchronizedQueue<Customer> eyeTestingQueue,
             SynchronizedQueue<Customer> translatingQueue,
@@ -32,7 +32,7 @@ class EyeTester extends AbstractAgent {
     public boolean documentsCorrect(Customer customer) {
 		if(customer.emiratesId == null ||
                 customer.driversLicense == null ||
-                customer.passport==null) {
+                customer.passport == null) {
 			return false;
 		} else {
             return true;
@@ -54,27 +54,47 @@ class EyeTester extends AbstractAgent {
 	public void run() {
 		while ((failureQueue.size() + successQueue.size()) != numCustomers) {
             Customer customer = eyeTestingQueue.poll();
-
-            process();
 			
             if (customer != null) {
+                System.out.println("\t\tCustomer processed by eye tester: " + customer);
+
 				if (!documentsCorrect(customer)) {
 					failureQueue.add(customer);
                     System.out.println("FAILURE AT EYE TESTING FOR: " + customer);
+                    System.out.println("("+successQueue.size()+" successes, "+
+                        failureQueue.size()+" failures, "+
+                        numCustomers+" in total)");
 					continue;
-				}
+				} else {
+                    process();
+                }
 
 				eyeTest(customer);
 
 				if(customer.driversLicenseTranslation == null) {
-					System.out.println("Sent to translation (by eye tester): " + customer);
+					System.out.println("\t\tSent to translation (by eye tester): " + customer);
                     translatingQueue.add(customer);
 				} else {
-                    System.out.println("Sent to licensing (by eye tester): " + customer);
+                    System.out.println("\t\tSent to licensing (by eye tester): " + customer);
 					licensingQueue.add(customer);
 				}
-			}
+			} else {
+                try {
+                    // try again in 10 seconds to avoid busy-waiting
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                    // ignore
+                }
+            }
 		}
-        System.out.println("Eye tester terminated.");
+        System.out.println("\t\tEye tester terminated.");
 	}
+
+    public int getMinWait() {
+        return minWait;
+    }
+
+    public int getMaxWait() {
+        return maxWait;
+    }
 }

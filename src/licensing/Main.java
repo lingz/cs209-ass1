@@ -1,16 +1,19 @@
 package licensing;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 public class Main {
     private static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
-    private static final int NUM_CUSTOMERS = 100;
+    private static int numCustomers;
     
     private static final int NUM_LICENSORS = 5;
     private static final int NUM_EYE_TESTERS = 5;
     private static final int NUM_TRANSLATORS = 5;
     private static final int NUM_PRINTERS = 5;
+
+    private static CountDownLatch latch = new CountDownLatch(NUM_PRINTERS);
 
     private static SynchronizedQueue<Customer> customerQueue = new SynchronizedQueue<Customer>(); // handled by Receptionist
     private static SynchronizedQueue<Customer> licensingQueue = new SynchronizedQueue<Customer>(); // handled by Licensor
@@ -22,42 +25,11 @@ public class Main {
     private static SynchronizedQueue<Customer> failureQueue = new SynchronizedQueue<Customer>();
 
     public static void main(String args[]) {
-        initializeCustomers(customerQueue, NUM_CUSTOMERS);
+        run(makeCustomerVector(10));
+    }
 
-        for (int i = 0; i < NUM_LICENSORS; i++) {
-            (new Thread(new Licensor(
-                    licensingQueue,
-                    eyeTestingQueue, translatingQueue, printingQueue,
-                    successQueue, failureQueue, NUM_CUSTOMERS
-                    ))).start();
-            System.out.println("Licensor thread started.");
-        }
-
-        for (int i = 0; i < NUM_EYE_TESTERS; i++) {
-            (new Thread(new EyeTester(
-                    eyeTestingQueue,
-                    translatingQueue, licensingQueue,
-                    successQueue, failureQueue, NUM_CUSTOMERS
-                    ))).start();
-            System.out.println("Eye tester thread started.");
-        }
-
-        for (int i = 0; i < NUM_TRANSLATORS; i++) {
-            (new Thread(new Translator(
-                    translatingQueue,
-                    eyeTestingQueue, licensingQueue,
-                    successQueue, failureQueue, NUM_CUSTOMERS
-                    ))).start();
-            System.out.println("Translator thread started.");
-        }
-
-        for (int i = 0; i < NUM_PRINTERS; i++) {
-            (new Thread(new PrintingAgent(
-                    printingQueue,
-                    successQueue, failureQueue, NUM_CUSTOMERS
-                    ))).start();
-            System.out.println("Printing agent thread started.");
-        }
+    public static Vector<UAEDriversLicense> run(Vector<Object[]> customerObjectVector) {
+        numCustomers = customerObjectVector.size();
 
         (new Thread(new Receptionist(
                 // Options for strategy are 'RANDOM' for random placement, 'PEEK' for picking the queue with the lowest time by
@@ -65,14 +37,94 @@ public class Main {
                 "PEEK",
                 customerQueue,
                 licensingQueue, eyeTestingQueue, translatingQueue,
-                successQueue, failureQueue, NUM_CUSTOMERS
+                successQueue, failureQueue, numCustomers
                 ))).start();
-        System.out.println("Receptionist thread started.");
+        System.out.println("\tReceptionist thread started.");
+
+        for (int i = 0; i < NUM_EYE_TESTERS; i++) {
+            (new Thread(new EyeTester(
+                    eyeTestingQueue,
+                    translatingQueue, licensingQueue,
+                    successQueue, failureQueue, numCustomers
+                    ))).start();
+            System.out.println("\t\tEye tester thread started.");
+        }
+
+        for (int i = 0; i < NUM_TRANSLATORS; i++) {
+            (new Thread(new Translator(
+                    translatingQueue,
+                    eyeTestingQueue, licensingQueue,
+                    successQueue, failureQueue, numCustomers
+                    ))).start();
+            System.out.println("\t\t\tTranslator thread started.");
+        }
+
+        for (int i = 0; i < NUM_LICENSORS; i++) {
+            (new Thread(new Licensor(
+                    licensingQueue,
+                    eyeTestingQueue, translatingQueue, printingQueue,
+                    successQueue, failureQueue, numCustomers
+                    ))).start();
+            System.out.println("\t\t\t\tLicensor thread started.");
+        }
+
+        for (int i = 0; i < NUM_PRINTERS; i++) {
+            (new Thread(new PrintingAgent(
+                    latch,
+                    printingQueue,
+                    successQueue, failureQueue, numCustomers
+                    ))).start();
+            System.out.println("\t\t\t\t\tPrinting agent thread started.");
+        }
+
+        initializeCustomers(customerObjectVector, customerQueue);
+
+        try {
+            latch.await();
+        } catch (InterruptedException ex) {
+            // ignore
+        }
+
+        return convertToVector(successQueue);
     }
 
     private static void initializeCustomers(
-            SynchronizedQueue<Customer> customerQueue, int numCustomers
-            ) {
+            Vector<Object[]> customerObjectVector,
+            SynchronizedQueue<Customer> customerQueue) {
+        long sleepSoFar = 0;
+
+        while (!customerObjectVector.isEmpty()) {
+            Object[] currentObject = customerObjectVector.remove(0);
+            long sleepTime = (Long) currentObject[0];
+            Customer customer = (Customer) currentObject[1];
+
+            long sleepDifference = sleepTime-sleepSoFar;
+
+            try {
+                //System.out.println("sleepTime: "+sleepTime+"; sleepSoFar: "+sleepSoFar);
+                Thread.sleep(sleepDifference);
+            } catch (InterruptedException ex) {
+                // ignore
+            }
+
+            sleepSoFar += sleepDifference;
+
+            customerQueue.add(customer);
+        }
+
+        System.out.println("Customers intialized.");
+    }
+
+    private static Vector<UAEDriversLicense> convertToVector(
+            SynchronizedQueue<UAEDriversLicense> successQueue) {
+        Vector<UAEDriversLicense> successVector = new Vector<UAEDriversLicense>();
+        while (!successQueue.isEmpty()) {
+            successVector.add(successQueue.poll());
+        }
+        return successVector;
+    }
+
+    private static Vector<Object[]> makeCustomerVector(int numCustomers) {
         String firstName;
         String lastName;
         String nationality;
@@ -80,6 +132,9 @@ public class Main {
         Date dateOfBirth;
         Date expiryDate;
         String idNumber;
+
+        Vector<Object[]> customerObjectVector = new Vector<Object[]>();
+        long sleepSoFar = 0;
 
         for (int i = 0; i < numCustomers; i++) {
             firstName = randomName();
@@ -91,12 +146,15 @@ public class Main {
             idNumber = randomId();
 
             EmiratesId emiratesId = new EmiratesId(
-                    firstName, lastName, nationality, gender, dateOfBirth, expiryDate,
-                    idNumber);
+                    firstName, lastName, nationality, gender, dateOfBirth,
+                    expiryDate, idNumber);
             DriversLicense driversLicense = new DriversLicense(
-                    firstName, lastName, nationality, gender, dateOfBirth, expiryDate);
+                    firstName, lastName, nationality, gender, dateOfBirth,
+                    expiryDate);
             Passport passport = new Passport(
-                    firstName, lastName, nationality, gender, dateOfBirth, expiryDate);
+                    firstName, lastName, nationality, gender, dateOfBirth,
+                    expiryDate);
+            
             if ((i % 11) == 0) {
                 passport = null;
             }
@@ -109,13 +167,21 @@ public class Main {
 
             Customer newCustomer = new Customer(
                     emiratesId, driversLicense, passport,
-                    null, null
-                    );
+                    null, null);
 
-            customerQueue.add(newCustomer);
+            long randomSleep = randomSleep();
+            long cumulativeSleep = randomSleep + sleepSoFar;
+            //System.out.println("random sleep: "+randomSleep+"; cumulativeSleep: "+cumulativeSleep+"; sleepSoFar: "+sleepSoFar);
+
+            Object[] customerObject = {cumulativeSleep, newCustomer};
+            sleepSoFar += randomSleep;
+
+            //System.out.println("New customer: "+newCustomer);
+            customerObjectVector.add(customerObject);
         }
 
-        System.out.println("Customers intialized.");
+        System.out.println("Customers made.");
+        return customerObjectVector;
     }
 
     private static String randomName() {
@@ -159,5 +225,10 @@ public class Main {
             randomId += (currentPower * ((int) (Math.random()*10)));
         }
         return randomId+"";
+    }
+
+    private static long randomSleep() {
+        long randomSleep = (long) ((Math.random()*1000)+1000);
+        return randomSleep;
     }
 }

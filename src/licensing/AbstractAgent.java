@@ -1,9 +1,6 @@
 package licensing;
 
 public abstract class AbstractAgent implements Runnable {
-    protected int minWait;
-    protected int maxWait;
-
 	AbstractAgent() {
         
 	}
@@ -20,14 +17,18 @@ public abstract class AbstractAgent implements Runnable {
 	}
 
     public int getAverageWait() {
-        return (minWait + maxWait) / 2;
+        return (getMinWait() + getMaxWait()) / 2;
     }
 
     protected void process() {
         try {
-            Thread.sleep(minWait + (int) (Math.random() * (maxWait-minWait)));
+            Thread.sleep(getMinWait() + (int) (Math.random() * (getMaxWait()-getMinWait())));
         } catch (InterruptedException ex) {
             // ignore
         }
     }
+
+    abstract int getMinWait();
+
+    abstract int getMaxWait();
 }

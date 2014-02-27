@@ -8,8 +8,8 @@ class Translator extends AbstractAgent {
 	private SynchronizedQueue<Customer> failureQueue;
 	private int numCustomers;
 
-    protected int minWait = 300;
-    protected int maxWait = 600;
+    protected int minWait = 300000;
+    protected int maxWait = 600000;
 	 
 	public Translator(SynchronizedQueue<Customer> translatingQueue,
             SynchronizedQueue<Customer> eyeTestingQueue,
@@ -30,7 +30,7 @@ class Translator extends AbstractAgent {
     public boolean documentsCorrect(Customer customer) {
 		if(customer.emiratesId == null ||
                 customer.driversLicense == null ||
-                customer.passport==null) {
+                customer.passport == null) {
 			return false;
 		} else {
             return true;
@@ -45,26 +45,46 @@ class Translator extends AbstractAgent {
 		while ((failureQueue.size() + successQueue.size()) != numCustomers) {
 			Customer customer = translatingQueue.poll();
 
-            process();
-
 			if (customer != null) {
+                System.out.println("\t\t\tCustomer processed by translator: " + customer);
+
 				if (!documentsCorrect(customer)) {
 					failureQueue.add(customer);
                     System.out.println("FAILURE AT TRANSLATING FOR: " + customer);
+                    System.out.println("("+successQueue.size()+" successes, "+
+                            failureQueue.size()+" failures, "+
+                            numCustomers+" in total)");
 					continue;
-				}
+				} else {
+                    process();
+                }
 
 				translate(customer);
 
 				if(customer.eyeTest == null) {
-                    System.out.println("Sent to eye testing (by translator): " + customer);
+                    System.out.println("\t\t\tSent to eye testing (by translator): " + customer);
 					eyeTestingQueue.add(customer);
 				} else {
-                    System.out.println("Sent to licensing (by translator): " + customer);
+                    System.out.println("\t\t\tSent to licensing (by translator): " + customer);
 					licensingQueue.add(customer);
 				}
-			}
+			} else {
+                try {
+                    // try again in 10 seconds to avoid busy-waiting
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                    // ignore
+                }
+            }
 		}
-        System.out.println("Translator terminated.");
+        System.out.println("\t\t\tTranslator terminated.");
 	}
+
+    public int getMinWait() {
+        return minWait;
+    }
+
+    public int getMaxWait() {
+        return maxWait;
+    }
 }
