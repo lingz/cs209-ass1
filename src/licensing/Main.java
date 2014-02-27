@@ -34,7 +34,7 @@ public class Main {
         (new Thread(new Receptionist(
                 // Options for strategy are 'RANDOM' for random placement, 'PEEK' for picking the queue with the lowest time by
                 // peaking at the queues, and 'FEWEST' for picking the queue with the least number of people in it.
-                "PEEK",
+                "RANDOM",
                 customerQueue,
                 licensingQueue, eyeTestingQueue, translatingQueue,
                 successQueue, failureQueue, numCustomers
